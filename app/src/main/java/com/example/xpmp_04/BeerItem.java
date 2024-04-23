@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class BeerItem implements Serializable {
 
-    private long id;
-    private String stupen;
-    private int amount;
+    private final long id;
+    private final String stupen;
+    private final int amount;
 
     public BeerItem(long id, String stupen, int amount) {
         this.id = id;

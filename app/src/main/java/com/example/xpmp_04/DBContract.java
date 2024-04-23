@@ -4,7 +4,8 @@ import android.provider.BaseColumns;
 
 public final class DBContract {
 
-    private DBContract() {}
+    private DBContract() {
+    }
 
     public static class BeerEntry implements BaseColumns {
         public static final String TABLE_NAME = "beers";

@@ -15,7 +15,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ItemList.db";
 
-    // Define table for beer list
     private static final String SQL_CREATE_BEERS =
             "CREATE TABLE IF NOT EXISTS " + DBContract.BeerEntry.TABLE_NAME + " (" +
                     DBContract.BeerEntry._ID + " INTEGER PRIMARY KEY," +
@@ -30,7 +29,6 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("DBHelper", "onCreate called");
-        // Create the table for storing beers
         db.execSQL(SQL_CREATE_BEERS);
     }
 
@@ -47,7 +45,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 DBContract.BeerEntry.COLUMN_NAME_STUPEN,
                 DBContract.BeerEntry.COLUMN_NAME_AMOUNT
         };
-        // Query the database for all beers
         return db.query(
                 DBContract.BeerEntry.TABLE_NAME,
                 projection,
@@ -60,7 +57,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    // Metoda pro získání seznamu stupňů piv
     public List<String> getAllStupne() {
         List<String> stupneList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -75,6 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return stupneList;
     }
+
     public boolean insertBeer(String stupen, int amount) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -84,7 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long newRowId = db.insert(DBContract.BeerEntry.TABLE_NAME, null, values);
         return newRowId != -1;
     }
-    // Metoda pro získání seznamu ID
+
     public List<String> getAllIDs() {
         List<String> idList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -100,7 +97,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return idList;
     }
 
-    // Metoda pro získání položky piva podle ID
     public BeerItem getBeerItemById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] projection = {
@@ -108,7 +104,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 DBContract.BeerEntry.COLUMN_NAME_AMOUNT
         };
         String selection = DBContract.BeerEntry._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(id) };
+        String[] selectionArgs = {String.valueOf(id)};
         Cursor cursor = db.query(
                 DBContract.BeerEntry.TABLE_NAME,
                 projection,
@@ -122,7 +118,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor != null && cursor.moveToFirst()) {
             String stupen = cursor.getString(cursor.getColumnIndexOrThrow(DBContract.BeerEntry.COLUMN_NAME_STUPEN));
             int amount = cursor.getInt(cursor.getColumnIndexOrThrow(DBContract.BeerEntry.COLUMN_NAME_AMOUNT));
-            beerItem = new BeerItem((long) id, stupen, amount);
+            beerItem = new BeerItem(id, stupen, amount);
             cursor.close();
         }
         db.close();
@@ -134,7 +130,6 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(DBContract.BeerEntry.COLUMN_NAME_STUPEN, stupen);
         values.put(DBContract.BeerEntry.COLUMN_NAME_AMOUNT, amount);
-        // Update the row, returning the number of affected rows
         int rowsAffected = db.update(
                 DBContract.BeerEntry.TABLE_NAME,
                 values,
@@ -146,7 +141,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean deleteBeer(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // Delete the row, returning the number of affected rows
         int rowsAffected = db.delete(
                 DBContract.BeerEntry.TABLE_NAME,
                 DBContract.BeerEntry._ID + " = ?",

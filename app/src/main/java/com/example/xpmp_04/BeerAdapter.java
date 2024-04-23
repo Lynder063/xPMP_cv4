@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BeerAdapter extends ArrayAdapter<BeerItem> {
 
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
 
     public BeerAdapter(Context context, List<BeerItem> items) {
         super(context, 0, items);
@@ -34,10 +34,8 @@ public class BeerAdapter extends ArrayAdapter<BeerItem> {
 
         BeerItem item = getItem(position);
         if (item != null) {
-            // Zobrazení názvu stupně v prvním poli
             holder.text1.setText(item.getStupen());
-            // Zobrazení množství v druhém poli
-            holder.text2.setText(String.valueOf(item.getAmount()) + " ml");
+            holder.text2.setText(item.getAmount() + " ml");
         }
 
         return convertView;
