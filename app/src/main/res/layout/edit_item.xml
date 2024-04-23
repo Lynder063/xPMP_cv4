@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Spinner
+        android:id="@+id/idsSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/select_degree_prompt"
+        android:layout_marginTop="8dp"
+        android:hint="Vyberte id"/>
+
+    <Spinner
+        android:id="@+id/editstupneSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/select_degree_prompt"
+        android:layout_marginTop="8dp"
+        android:hint="Vyberte stupeň"/>
+
+    <EditText
+        android:id="@+id/editamountEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Množství (ml)"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/upravitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Potvrdit"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Smazat záznam"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
